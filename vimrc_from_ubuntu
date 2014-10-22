@@ -23,12 +23,23 @@ map <C-l> :TlistToggle<CR>
 "Install Vundle automatically
 "------------------------------------------------------------------------------------
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle/README.md')
+if (g:iswindows==1)
+	let vundle_readme=expand('$HOME/vimfiles/bundle/Vundle/README.md')
+else
+	let vundle_readme=expand('~/.vim/bundle/Vundle/README.md')
+endif
+
 if !filereadable(vundle_readme)
 	echo "Installing Vundle.."
 	echo ""
-	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle
+	if (g:iswindows==1)
+		silent !mkdir $HOME/vimfiles/bundle
+		silent !git clone https://github.com/gmarik/Vundle.vim.git $HOME/vimfiles/bundle/Vundle
+	else
+		silent !mkdir -p ~/.vim/bundle
+		silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle
+	endif
+
 	let iCanHazVundle=0
 endif
 
@@ -39,8 +50,14 @@ set nocompatible " be iMproved
 filetype off " required!
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle
-call vundle#begin()
+if (g:iswindows==1)
+	set rtp+=$HOME/vimfiles/bundle/Vundle
+	let path=$HOME/vimfiles/bundle
+	call vundle#begin(path)
+else
+	set rtp+=~/.vim/bundle/Vundle
+	call vundle#begin()
+endif
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Lokaltog/vim-powerline'
@@ -193,7 +210,13 @@ set tabstop=4
 "CompleteOpt
 "------------------------------------------------------------------------------
 set completeopt=menuone,menu,longest
-set tags+=~/.vim/tags/cpp
+
+if(g:iswindows==1)
+	set tags+=$HOME/vimfiles/tags/cpp
+else
+	set tags+=~/.vim/tags/cpp
+endif
+
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
