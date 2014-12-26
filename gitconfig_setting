@@ -1,0 +1,20 @@
+[user]
+	name = CY Fan
+	email = sis10045
+[core]
+	editor = vim
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[mergeetool]
+	trustExitCode = false
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)%an%Creset %C(blue)<%ce>%Creset' --abbrev-commit --all
+    st = status
+    co = checkout
+    ci = commit
+    s = svn
+    rb = rebase
+[color]
+	status = auto
