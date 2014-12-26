@@ -19,6 +19,8 @@ map <C-n> :NERDTreeToggle<CR>
 " open taglist
 map <C-l> :TlistToggle<CR>
 
+map <tab> <C-W>w
+
 "------------------------------------------------------------------------------------
 "Install Vundle automatically
 "------------------------------------------------------------------------------------
@@ -66,6 +68,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'taglist.vim'
 Plugin 'vim-scripts/omnicppcomplete'
 Plugin 'a.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 call vundle#end() " required
 filetype plugin indent on " required
@@ -205,6 +209,7 @@ filetype plugin on
 set autoindent
 set shiftwidth=4
 set tabstop=4
+set nowrap
 
 "------------------------------------------------------------------------------
 "CompleteOpt
@@ -215,6 +220,7 @@ if(g:iswindows==1)
 	set tags+=$HOME/vimfiles/tags/cpp
 else
 	set tags+=~/.vim/tags/cpp
+	set tags+=~/.vim/tags/QT
 endif
 
 let OmniCpp_NamespaceSearch = 1
@@ -228,3 +234,11 @@ let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 " automatically open and close the popup menu / preview window
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " set completeopt=menuone,menu,longest,preview
+
+"------------------------------------------------------------------------------
+"Ultisnips
+"------------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
