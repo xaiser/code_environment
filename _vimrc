@@ -97,10 +97,6 @@ set laststatus=2
 set t_Co=256
 set encoding=utf-8
 let g:Powerline_symbols="fancy"
-if (g:iswindows==1)
-else
-	" do nothing
-endif
 
 "------------------------------------------------------------------------------
 "Taglist setting
@@ -204,7 +200,6 @@ function Do_CsTag()
 	endif
 endfunction
 
-
 "------------------------------------------------------------------------------
 "General setting
 "------------------------------------------------------------------------------
@@ -217,6 +212,10 @@ filetype plugin on
 set autoindent
 set shiftwidth=4
 set tabstop=4
+
+if(g:iswindows==1)
+	colorscheme earth
+endif
 
 
 "------------------------------------------------------------------------------
