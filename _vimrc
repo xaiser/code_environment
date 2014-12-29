@@ -85,6 +85,7 @@ Plugin 'vim-scripts/omnicppcomplete'
 Plugin 'a.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'gregsexton/gitv'
 
 call vundle#end() " required
 filetype plugin indent on " required
