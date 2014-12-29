@@ -214,8 +214,11 @@ set autoindent
 set shiftwidth=4
 set tabstop=4
 
+" tell vim not to generate ~ file
+set nobackup
+
 if(g:iswindows==1)
-	colorscheme earth
+	colorscheme spring
 endif
 
 
