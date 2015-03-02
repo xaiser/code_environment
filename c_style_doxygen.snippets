@@ -1,0 +1,44 @@
+# this is comment
+snippet dxyfile "function comment" b
+/******************************************************************************//**
+ *  @file `!p snip.rv = snip.fn`
+ *  @class `!p snip.rv = snip.basename`
+ *  @brief ${1:brief comment}
+ * 
+ *  ${2:detial comment}
+ *  
+ *  @author CY Fan
+ *  @date `!v strftime("%Y-%m-%d, %a %H:%M:%S")`
+ **********************************************************************************/
+endsnippet
+
+# class object such as struct, enum
+snippet dxyobj "class object comment" b
+/**
+ *  @class `!p snip.rv = snip.basename`
+ *  @brief ${1:brief comment}
+ * 
+ *  ${2:detial comment}
+ */
+endsnippet
+
+snippet dxycm "class member comment" b
+/**
+ *  @brief ${1:brief comment}
+ *  @${3:private}
+ * 
+ *  ${2:detial comment}
+ */
+endsnippet
+
+snippet dxycf "class function comment" b
+/**
+ *  @brief ${1:brief comment}
+ *  @${3:public}
+ *  @param[in] ${4:input param}
+ *  @param[out] ${5:output param}
+ *  @return ${6:return}
+ * 
+ *  ${2:detial comment}
+ */
+endsnippet
