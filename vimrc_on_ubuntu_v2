@@ -1,9 +1,6 @@
 set encoding=utf-8
 set guifont=Consolas\ for\ Powerline\ FixedD:h12
-"set guifont=Source\ Code\ Pro\ Medium:h12
-"set guifont=Sauce\ Code\ Powerline:h12
 set termencoding=utf-8
-language messages zh_TW.utf-8
 
 " make gvim on window encode menu right
 source $VIMRUNTIME/vimrc_example.vim
@@ -20,6 +17,10 @@ if ( has("win32") || has("win16") || has("win64") || has("win16") )
 	let g:iswindows=1
 else
 	let g:iswindows=0
+endif
+
+if (g:iswindows==1)
+	language messages zh_TW.utf-8
 endif
 
 "------------------------------------------------------------------------------
@@ -220,7 +221,7 @@ set nobackup
 if(g:iswindows==1)
 	colorscheme spring
 else
-	colorscheme spring
+	colorscheme koehler
 endif
 
 
