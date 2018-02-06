@@ -87,6 +87,7 @@ Plugin 'a.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'gregsexton/gitv'
+Plugin 'tomasr/molokai'
 
 call vundle#end() " required
 filetype plugin indent on " required
@@ -218,10 +219,24 @@ set tabstop=4
 " tell vim not to generate ~ file
 set nobackup
 
+" tell vim not to create .nu
+set noundofile
+
+set nowrap
+
+" set diff split verticl
+set diffopt=vertical
+
 if(g:iswindows==1)
 	colorscheme spring
 else
-	colorscheme koehler
+	colorscheme molokai
+endif
+
+if(g:iswindows==1)
+	colorscheme spring
+	set lines=999 columns=999
+	au GUIEnter * simalt ~x
 endif
 
 
