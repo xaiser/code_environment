@@ -62,7 +62,14 @@ snippet cdr "construction" b
 {}
 
 const `!p snip.rv = snip.basename` & `!p snip.rv = snip.basename`::operator=(const `!p snip.rv = snip.basename` & rhs)
-{}
+{
+    if (this == &rhs)
+	{
+	    return *this;
+	}
+
+    return *this;
+}
 endsnippet
 
 snippet doc "construction" b
