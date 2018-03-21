@@ -11,14 +11,51 @@ class $1
 };
 endsnippet
 
-snippet inc "include" b
+snippet gtestcp "google test class with parameter" b
+class $1 : public TestWithParam
+{
+    public:
+	    $1()
+		{}
+	    ~$1()
+		{}
+
+		virtual void SetUp() 
+		{}
+		virtual void TearDown() 
+		{}
+};
+endsnippet
+
+snippet using "using namespace" b
+using namespace $1
+endsnippet
+
+snippet usinggtest "using google test namespace" b
+using ::testing::TestWithParam;
+using ::testing::Values;
+endsnippet
+
+snippet incu "include" b
 #include "$1"
 endsnippet
 
+snippet inc "include" b
+#include <$1>
+endsnippet
+
 snippet for "for loop" b
-for ( int i = $1; i < $2; i++ )
+for ( int i = $1; i < $2; $3++ )
 {
-    ${3://statement}
+    ${4://statement}
+}
+endsnippet
+
+snippet del "delete object" b
+if ( 0 != $1 )
+{
+	delete $1;
+	$1 = 0;
 }
 endsnippet
 
@@ -62,14 +99,7 @@ snippet cdr "construction" b
 {}
 
 const `!p snip.rv = snip.basename` & `!p snip.rv = snip.basename`::operator=(const `!p snip.rv = snip.basename` & rhs)
-{
-    if (this == &rhs)
-	{
-	    return *this;
-	}
-
-    return *this;
-}
+{}
 endsnippet
 
 snippet doc "construction" b
@@ -88,4 +118,15 @@ snippet docS "construction" b
 /*---------------------------------------------------------------------------------
  * $1
  *-------------------------------------------------------------------------------*/
+endsnippet
+
+snippet gtestmain "main for google test" b
+#include "gtest/gtest.h"
+
+int main(int argc, char *argv[])
+{
+    printf("Running main() from gtest_main.cc\n");
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
 endsnippet

@@ -1,0 +1,54 @@
+snippet cmake "cmake common header" b
+project($1 CXX C)
+cmake_minimum_required(VERSION 2.6.2)
+
+function(getLinuxPathFrom raw_path new_path)
+	string(REGEX MATCH "^/" is_linux_path "${raw_path}")
+
+	if(is_linux_path)
+		#message(STATUS "get unix path ")
+	else()
+		message(STATUS "translate " ${raw_path})
+		string(REGEX REPLACE "\\\\" "/" _linux_path "${raw_path}")
+		string(REGEX REPLACE "^([a-zA-Z]):" "/\\1" linux_path "${_linux_path}")
+		message(STATUS "to " ${linux_path})
+		set(${new_path} "${linux_path}" PARENT_SCOPE)
+	endif()
+endfunction()
+
+# Lib path
+if(Lib_path)
+	if(WIN32)
+		set(v_sis_lib_path ${Lib_path})
+	else()
+		getLinuxPathFrom("${Lib_path}" v_sis_lib_path)
+	endif()
+	message(STATUS "Lib is " ${v_sis_lib_path})
+else()
+	message(FATAL_ERROR "Miss Lib path")
+endif()
+
+include(${v_sis_lib_path}/include/cmake/utility/OSsetting.cmake)
+include(${v_sis_lib_path}/include/cmake/utility/utility.cmake)
+endsnippet
+
+snippet gtest "cmake common header" b
+cmake_minimum_required(VERSION 2.8.2)
+project($1 CXX C)
+
+if(NOT GTEST_DIR)
+	set(GTEST_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../lib/googletest")
+endif()
+
+FILE(GLOB cpps "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+FILE(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
+
+include_directories(${GTEST_DIR}/include)
+
+add_executable($2 ${cpps} ${headers})
+
+target_link_libraries($2 ${GTEST_DIR}/gtest.lib)
+
+enable_testing()
+add_test($2_test $2)
+endsnippet
