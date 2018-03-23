@@ -130,3 +130,11 @@ int main(int argc, char *argv[])
     return RUN_ALL_TESTS();
 }
 endsnippet
+
+snippet gtesthead "google test include and TEST" b
+#include "gtest/gtest.h"
+
+TEST($1, $2)
+{
+}
+endsnippet
