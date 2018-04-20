@@ -40,10 +40,16 @@ if(NOT GTEST_DIR)
 	set(GTEST_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../lib/googletest")
 endif()
 
+if(NOT COMMON_DIR)
+	set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../common")
+endif()
+
 FILE(GLOB cpps "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 FILE(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
 
 include_directories(${GTEST_DIR}/include)
+include_directories(${COMMON_DIR}/property)
+include_directories(${COMMON_DIR}/)
 
 add_executable($2 ${cpps} ${headers})
 
