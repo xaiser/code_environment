@@ -47,21 +47,30 @@ endif()
 FILE(GLOB cpps "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 FILE(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
 
+
+set(CPP_11_EXTENSION "-std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CPP_11_EXTENSION}")
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+
 include_directories(${GTEST_DIR}/include)
 include_directories(${COMMON_DIR}/property)
 include_directories(${COMMON_DIR}/)
 
-add_executable($2 ${cpps} ${headers})
+set(ExeName "$2")
+
+include(${COMMON_DIR}/cmake/modules/gcov.cmake)
+
+add_executable(${ExeName} ${cpps} ${headers})
 
 if(WIN32)
-	target_link_libraries($2 ${GTEST_DIR}/gtest.lib)
+	target_link_libraries(${ExeName} ${GTEST_DIR}/gtest.lib)
 else()
 	add_definitions(
 		-Wfatal-errors
 	)
-	target_link_libraries($2 ${GTEST_DIR}/gtest.a)
+	target_link_libraries(${ExeName} ${GTEST_DIR}/gtest.a)
 endif()
 
 enable_testing()
-add_test($2_test $2)
+add_test($2_test ${ExeName})
 endsnippet
