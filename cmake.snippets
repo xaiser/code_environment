@@ -64,7 +64,7 @@ add_executable(${ExeName} ${cpps} ${headers})
 
 add_custom_command(TARGET ${ExeName}
 	POST_BUILD
-	COMMAND ln -s ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
+	COMMAND ln -sf ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 	)
 
