@@ -62,6 +62,12 @@ include(${COMMON_DIR}/cmake/modules/gcov.cmake)
 
 add_executable(${ExeName} ${cpps} ${headers})
 
+add_custom_command(TARGET ${ExeName}
+	POST_BUILD
+	COMMAND ln -s ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+	)
+
 if(WIN32)
 	target_link_libraries(${ExeName} ${GTEST_DIR}/gtest.lib)
 else()
