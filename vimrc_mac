@@ -2,13 +2,6 @@ set encoding=utf-8
 set guifont=Consolas\ for\ Powerline\ FixedD:h12
 set termencoding=utf-8
 
-" make gvim on window encode menu right
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-behave mswin
-
 "------------------------------------------------------------------------------
 "Global var
 "------------------------------------------------------------------------------
@@ -21,6 +14,12 @@ endif
 
 if (g:iswindows==1)
 	language messages zh_TW.utf-8
+	" make gvim on window encode menu right
+	source $VIMRUNTIME/vimrc_example.vim
+	source $VIMRUNTIME/mswin.vim
+	source $VIMRUNTIME/delmenu.vim
+	source $VIMRUNTIME/menu.vim
+	behave mswin
 endif
 
 "------------------------------------------------------------------------------
@@ -82,12 +81,15 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'taglist.vim'
-Plugin 'vim-scripts/omnicppcomplete'
+"Plugin 'vim-scripts/omnicppcomplete'
 Plugin 'a.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'gregsexton/gitv'
 Plugin 'tomasr/molokai'
+Plugin 'valloric/youcompleteme'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'yaml.vim'
 
 call vundle#end() " required
 filetype plugin indent on " required
@@ -227,10 +229,15 @@ set nowrap
 " set diff split verticl
 set diffopt=vertical
 
+" color
 if(g:iswindows==1)
 	colorscheme spring
 else
-	colorscheme molokai
+	"colorscheme molokai
+	set background=dark
+	"set background=light
+	let g:solarized_termcolors=256
+	colorscheme solarized
 endif
 
 if(g:iswindows==1)
@@ -266,7 +273,16 @@ let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 "------------------------------------------------------------------------------
 "Ultisnips
 "------------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-f>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
+
+"------------------------------------------------------------------------------
+"YCM setting
+"------------------------------------------------------------------------------
+" close syntax chaeck
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
