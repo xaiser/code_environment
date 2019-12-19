@@ -11,8 +11,19 @@ class $1
 };
 endsnippet
 
-snippet gtestcp "google test class with parameter" b
-class $1 : public TestWithParam
+snippet gtestp "google test class with parameter" b
+struct $1Param
+{
+    $1Param( initializer_list<int> t, initializer_list<int> e ):
+	    test(t), expect(e)
+	{}
+	~$1Param()
+	{}
+    vector<int> test;
+    vector<int> expect;
+};
+
+class $1 : public ::testing::TestWithParam<$1Param>
 {
     public:
 	    $1()
@@ -25,6 +36,28 @@ class $1 : public TestWithParam
 		virtual void TearDown() 
 		{}
 };
+
+TEST_P($1, $2)
+{
+    $1Param param = GetParam();
+}
+
+INSTANTIATE_TEST_CASE_P($3, $1, ::testing::ValuesIn());
+endsnippet
+
+snippet gtestf "google test fixture" b
+class $1 : public ::testing::Test
+{
+    protected:
+	    void SetUp()
+		{}
+		void TearDown()
+		{}
+};
+
+TEST_F($1, $2)
+{
+}
 endsnippet
 
 snippet using "using namespace" b
@@ -52,10 +85,10 @@ for ( unsigned int i = $1; i < $2; $3++ )
 endsnippet
 
 snippet del "delete object" b
-if ( 0 != $1 )
+if ( NULL != $1 )
 {
 	delete $1;
-	$1 = 0;
+	$1 = NULL;
 }
 endsnippet
 
@@ -81,7 +114,15 @@ class ${1:`!p snip.rv = snip.basename`}
 	    ~$1();
 
         $1(const $1 & _$1);
-        const $1 & operator=(const $1 & rhs);
+        const $1 & operator=(const $1 & rhs)
+		{
+		    if ( this == &rhs )
+			{
+			    return *this;
+			}
+
+			return *this;
+		}
 	private:
 };
 
