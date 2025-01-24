@@ -142,18 +142,23 @@ if has("cscope")
 endif
 
 function Do_CsTag()
-	if !empty(glob("**/*.c", 0, 1)) || !empty(glob("**/*.h", 0, 1))
+	"if !empty(glob("*.cpp", 0, 1)) || !empty(glob("*.h", 0, 1))
+	if expand('%:e') ==# 'c' || expand('%:e') ==# 'h'
+		"echo "run c tags!!"
 		call Do_CsTag_C()
 	else
+		"echo "run rust tags!!"
 		call Do_CsTag_Rust()
 	endif
 endfunction
 
 function Do_CsTag_Rust()
-	if filereadable("tags")
-		execute "!rm tags"
+	if !empty(glob("*.rs", 0, 1))
+		if filereadable("tags")
+			execute "!rm tags"
+		endif
+		execute "!ctags -R --languages=Rust --rust-kinds=+f --fields=+l ."
 	endif
-	execute "!ctags -R --languages=Rust --rust-kinds=+f --fields=+l ."
 endfunction
 
 
